@@ -1,0 +1,55 @@
+{
+  "name": "mmz-torrent",
+  "productName": "MMZ Torrent",
+  "version": "0.1.0",
+  "description": "MMZ Torrent - modern BitTorrent client for Windows and Linux",
+  "main": "out/main/index.js",
+  "author": "MMZ Torrent contributors",
+  "license": "MIT",
+  "homepage": "https://github.com/mmz-torrent/mmz-torrent",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mmz-torrent/mmz-torrent.git"
+  },
+  "scripts": {
+    "dev": "electron-vite dev",
+    "start": "electron-vite preview",
+    "build": "electron-vite build",
+    "typecheck": "tsc --noEmit -p tsconfig.node.json && tsc --noEmit -p tsconfig.web.json && tsc --noEmit -p tsconfig.test.json",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "engine:test": "py -3.10 -m unittest discover -s engine/tests -v",
+    "icons": "node scripts/generate-icons.mjs",
+    "dist": "npm run build && electron-builder",
+    "dist:win": "npm run build && electron-builder --win",
+    "dist:linux": "npm run build && electron-builder --linux"
+  },
+  "dependencies": {
+    "lucide-react": "^0.544.0",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "zod": "^3.25.76",
+    "zustand": "^5.0.8"
+  },
+  "devDependencies": {
+    "@resvg/resvg-js": "^2.6.2",
+    "@tailwindcss/vite": "^4.1.13",
+    "@types/node": "^24.7.0",
+    "@types/react": "^19.1.13",
+    "@types/react-dom": "^19.1.9",
+    "@vitejs/plugin-react": "^5.0.2",
+    "electron": "^37.4.0",
+    "electron-builder": "^26.0.12",
+    "electron-vite": "^4.0.1",
+    "tailwindcss": "^4.1.13",
+    "typescript": "^5.9.2",
+    "vite": "^7.1.5",
+    "vitest": "^3.2.4"
+  },
+  "allowScripts": {
+    "electron@37.10.3": true,
+    "esbuild@0.25.12": true,
+    "esbuild@0.28.2": true,
+    "electron-winstaller@5.4.0": true
+  }
+}

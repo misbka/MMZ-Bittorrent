@@ -1,0 +1,111 @@
+@import 'tailwindcss';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ---------------------------------------------------------------------------
+   Design tokens: light + dark themes driven by the `dark` class on <html>.
+   Blue accents for light, blue/cyan accents for dark, per the spec.
+--------------------------------------------------------------------------- */
+@theme {
+  --font-sans:
+    'Inter', 'Segoe UI', 'system-ui', -apple-system, 'Helvetica Neue', Arial, sans-serif;
+
+  --color-surface-0: var(--mmz-surface-0);
+  --color-surface-1: var(--mmz-surface-1);
+  --color-surface-2: var(--mmz-surface-2);
+  --color-surface-3: var(--mmz-surface-3);
+  --color-border: var(--mmz-border);
+  --color-ink: var(--mmz-ink);
+  --color-ink-dim: var(--mmz-ink-dim);
+  --color-ink-faint: var(--mmz-ink-faint);
+  --color-accent: var(--mmz-accent);
+  --color-accent-soft: var(--mmz-accent-soft);
+  --color-ok: var(--mmz-ok);
+  --color-warn: var(--mmz-warn);
+  --color-danger: var(--mmz-danger);
+}
+
+:root {
+  --mmz-surface-0: #f4f6fa;
+  --mmz-surface-1: #ffffff;
+  --mmz-surface-2: #eef1f6;
+  --mmz-surface-3: #e3e8f0;
+  --mmz-border: #d7dde8;
+  --mmz-ink: #16202e;
+  --mmz-ink-dim: #4a5768;
+  --mmz-ink-faint: #8593a6;
+  --mmz-accent: #2563eb;
+  --mmz-accent-soft: #dbe7ff;
+  --mmz-ok: #16a34a;
+  --mmz-warn: #d97706;
+  --mmz-danger: #dc2626;
+  color-scheme: light;
+}
+
+.dark {
+  --mmz-surface-0: #0f1115;
+  --mmz-surface-1: #161a21;
+  --mmz-surface-2: #1c222b;
+  --mmz-surface-3: #242b36;
+  --mmz-border: #2a323f;
+  --mmz-ink: #e6edf6;
+  --mmz-ink-dim: #9aa9bd;
+  --mmz-ink-faint: #6b7a90;
+  --mmz-accent: #3b82f6;
+  --mmz-accent-soft: #17233b;
+  --mmz-ok: #34d399;
+  --mmz-warn: #fbbf24;
+  --mmz-danger: #f87171;
+  color-scheme: dark;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+body {
+  background: var(--mmz-surface-0);
+  color: var(--mmz-ink);
+  font-family: var(--font-sans);
+  font-size: 13px;
+  -webkit-font-smoothing: antialiased;
+  user-select: none;
+}
+
+/* thin, unobtrusive scrollbars */
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+*::-webkit-scrollbar-thumb {
+  background: var(--mmz-surface-3);
+  border-radius: 8px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: var(--mmz-ink-faint);
+  background-clip: content-box;
+}
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+@keyframes mmz-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.animate-mmz-in {
+  animation: mmz-fade-in 0.16s ease-out;
+}

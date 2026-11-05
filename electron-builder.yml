@@ -1,0 +1,77 @@
+appId: com.mmz.torrent
+productName: MMZ Torrent
+copyright: © 2026 MMZ Torrent contributors
+
+directories:
+  output: release
+  buildResources: resources
+
+# Only compiled output plus the icon set ships inside the app.
+files:
+  - out/**
+  - package.json
+  - "!out/**/*.tsbuildinfo"
+
+# The Python/libtorrent engine lives outside the asar so it can be spawned
+# directly: <resources>/engine/run.py  (see src/main/paths.ts).
+extraResources:
+  - from: engine
+    to: engine
+    filter:
+      - "**/*.py"
+      - "runtime/**"
+      - "!**/__pycache__/**"
+      - "!tests/**"
+
+asar: true
+
+win:
+  # Pre-generated multi-size .ico (see scripts/generate-icons.mjs).  Pointing
+  # at a PNG would make electron-builder run its icon-tool converter, which
+  # can crash with 0xC0000005 on some Windows/Node combinations.
+  icon: resources/icons/icon.ico
+  artifactName: "${productName}-${version}-win-${arch}.${ext}"
+  target:
+    - target: nsis
+      arch: [x64]
+    - target: portable
+      arch: [x64]
+
+nsis:
+  oneClick: false
+  perMachine: false
+  allowToChangeInstallationDirectory: true
+  createDesktopShortcut: true
+  createStartMenuShortcut: true
+  shortcutName: MMZ Torrent
+  deleteAppDataOnUninstall: false
+
+portable:
+  artifactName: "${productName}-${version}-portable-${arch}.${ext}"
+
+linux:
+  icon: resources/icons/icon.png
+  synopsis: Modern BitTorrent client
+  category: Network
+  maintainer: MMZ Torrent contributors <mmz-torrent@example.com>
+  artifactName: "${productName}-${version}-linux-${arch}.${ext}"
+  target:
+    - target: AppImage
+      arch: [x64]
+    - target: deb
+      arch: [x64]
+    - target: rpm
+      arch: [x64]
+
+# The engine needs a Python interpreter with libtorrent at runtime; Debian/
+# Ubuntu ship one as python3-libtorrent.
+deb:
+  depends:
+    - python3
+    - python3-libtorrent
+  recommends:
+    - python3
+
+rpm:
+  depends:
+    - python3
